@@ -40,26 +40,30 @@ android {
     }
 
     signingConfigs {
-		create("release") {
-			val storePath = System.getenv("ANDROID_KEYSTORE_PATH")
-			val alias = System.getenv("ANDROID_KEY_ALIAS")
-			val keyPass = System.getenv("ANDROID_KEY_PASSWORD")
-			val storePass = System.getenv("ANDROID_STORE_PASSWORD")
+        create("release") {
+            val keystorePropertiesFile = rootProject.file("../../openScale.keystore")
+            val keystoreProperties = Properties()
+            var propertiesLoaded : Boolean
 
-			if (
-				!storePath.isNullOrBlank() &&
-				!alias.isNullOrBlank() &&
-				!keyPass.isNullOrBlank() &&
-				!storePass.isNullOrBlank()
-			) {
-				storeFile = file(storePath)
-				keyAlias = alias
-				keyPassword = keyPass
-				storePassword = storePass
-			} else {
-				logger.warn("Release signing environment variables are incomplete")
-			}
-		}
+            try {
+                FileInputStream(keystorePropertiesFile).use { fis ->
+                    keystoreProperties.load(fis)
+                }
+                propertiesLoaded = true
+            } catch (e: FileNotFoundException) {
+                project.logger.warn("Keystore properties file not found: ${keystorePropertiesFile.absolutePath}. Release signing might fail if not configured via environment variables.")
+                propertiesLoaded = false
+            }
+
+            if (propertiesLoaded && keystoreProperties.containsKey("releaseKeyStore")) {
+                storeFile = file(rootProject.projectDir.canonicalPath + "/" + keystoreProperties.getProperty("releaseKeyStore"))
+                keyAlias = keystoreProperties.getProperty("releaseKeyAlias")
+                keyPassword = keystoreProperties.getProperty("releaseKeyPassword")
+                storePassword = keystoreProperties.getProperty("releaseStorePassword")
+            } else {
+                project.logger.warn("Release signing information not fully loaded from properties. Ensure it's set via environment variables or the properties file is correct.")
+            }
+        }
 
         create("oss") {
             val keystoreOSSPropertiesFile = rootProject.file("../../openScale_oss.keystore")
