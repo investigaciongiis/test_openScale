@@ -41,10 +41,9 @@ android {
 
     signingConfigs {
 		create("release") {
-			val storePath = System.getenv("ANDROID_KEYSTORE_PATH")
-			val alias = System.getenv("ANDROID_KEY_ALIAS")
-			val keyPass = System.getenv("ANDROID_KEY_PASSWORD")
-			val storePass = System.getenv("ANDROID_STORE_PASSWORD")
+			val alias = System.getenv("KEYSTORE_ALIAS_NAME")
+			val keyPass = System.getenv("KEYSTORE_ALIAS_PASS")
+			val storePass = System.getenv("KEYSTORE_PASSWORD")
 
 			if (
 				!storePath.isNullOrBlank() &&
@@ -52,7 +51,7 @@ android {
 				!keyPass.isNullOrBlank() &&
 				!storePass.isNullOrBlank()
 			) {
-				storeFile = file(storePath)
+				storeFile = rootProject.file('release.keystore')
 				keyAlias = alias
 				keyPassword = keyPass
 				storePassword = storePass
