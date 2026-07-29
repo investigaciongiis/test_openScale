@@ -1,0 +1,33 @@
+{
+  "app_metadata": {
+    "Name": "openScale",
+    "Developer": "openScale",
+    "Category": "Mobile Health (mHealth) / EMR Client",
+    "Supported platforms": "Android (SDK 19-33+)",
+    "Version": "3.1.1",
+    "Last update": "29/07/2026",
+    "Compatible idioms": "English",
+    "Source": "Open source",
+    "License": "MIT",
+    "Main language": "Java + Kotlin + XML"
+  },
+  "actors": {
+    "Auditor": "Juan José López Jiménez",
+    "Requirement Engineering team": [
+      "Carlos M. Mejía-Granda",
+      "José L Fernández-Alemán",
+      "Juan Manuel Carrillo-de-Gea",
+      "Joaquín Nicolás",
+      "Juan José López Jiménez"
+    ],
+    "Engineering Group (EN)": [
+      "Carlos M. Mejía-Granda",
+      "José L Fernández-Alemán",
+      "Juan Manuel Carrillo-de-Gea",
+      "Joaquín Nicolás",
+      "Juan José López Jiménez"
+    ]
+  },
+  "header_text": "openScale v3.1.1",
+  "cover_page_text": "openScale - v3.1.1"
+}
