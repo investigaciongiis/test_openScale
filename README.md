@@ -2,7 +2,6 @@
 [![Translation status](https://hosted.weblate.org/widgets/openscale/-/strings/svg-badge.svg)](https://hosted.weblate.org/engage/openscale/?utm_source=widget)
 =========
 
-
 Open-source weight and body metrics tracker, with support for Bluetooth scales
 
 <a href="https://f-droid.org/repository/browse/?fdid=com.health.openscale" target="_blank">
