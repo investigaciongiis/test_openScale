@@ -44,14 +44,16 @@ android {
 			val alias = System.getenv("KEYSTORE_ALIAS_NAME")
 			val keyPass = System.getenv("KEYSTORE_ALIAS_PASS")
 			val storePass = System.getenv("KEYSTORE_PASSWORD")
+			val keystoreFile = rootProject.file(
+				System.getenv("KEYSTORE_FILE") ?: "../release.keystore"
+			)
 
 			if (
-				!storePath.isNullOrBlank() &&
 				!alias.isNullOrBlank() &&
 				!keyPass.isNullOrBlank() &&
 				!storePass.isNullOrBlank()
 			) {
-				storeFile = rootProject.file('release.keystore')
+				storeFile = keystoreFile
 				keyAlias = alias
 				keyPassword = keyPass
 				storePassword = storePass
