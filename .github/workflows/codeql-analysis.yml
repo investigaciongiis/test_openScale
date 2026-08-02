@@ -19,25 +19,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-
+        
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v4
         with:
-          languages: java
+          languages: java-kotlin
           build-mode: manual
-          config-file: .github/codeql/codeql-security.yml
 
       - name: Build openScale for CodeQL
         shell: bash
         working-directory: android_app
         run: |
-            chmod +x gradlew
-            ./gradlew --no-daemon clean assembleRelease
+          chmod +x gradlew
+          ./gradlew --no-daemon clean assembleRelease
 
       - name: Perform CodeQL Analysis
         if: ${{ vars.ENABLE_CODE_SCANNING_UPLOAD == 'true' }}
         uses: github/codeql-action/analyze@v4
         with:
+          category: /language:java-kotlin
           output: report/codeql
           upload: false
         continue-on-error: true
